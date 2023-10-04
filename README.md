@@ -1,5 +1,8 @@
-# INSTALANDO VIA MINIKUBE
-https://gitlab.com/nanuchi/argocd-app-config
+# Instalando e testando o argocd
+    O objetivo é rodar no minikube e depois testar com alterações 
+    nos arquivos que estão dentro de dev: deployment.yaml e service.yaml. 
+    Tudo que que for alterado lá, será refletido no ambiente instalado. 
+## INSTALANDO VIA MINIKUBE
 
 Estou partindo do presuposto que o minikube já foi instalando. (https://minikube.sigs.k8s.io/docs/start/ )
 
@@ -17,17 +20,18 @@ apiserver: Running
 kubeconfig: Configured
 
 ```
+# Instalando  ArgoCD em  k8s
+## CRIE UM NAMESPACE
 
-# CRIE UM NAMESPACE
-# instalando  ArgoCD em  k8s
-``` kubectl create namespace argocd
+``` 
+    kubectl create namespace argocd
 ```
 
-# BAIXE O YAML
+## BAIXE O YAML
 ```
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
-# VERIFIQUE OS PODS
+## VERIFIQUE OS PODS
 ``` 
 argocd$ kubectl get pods -n argocd
 NAME                                                READY   STATUS    RESTARTS   AGE
@@ -41,7 +45,7 @@ argocd-server-5986f74c99-f55sf                      1/1     Running   0         
 ``` 
 
 
-# MAPEANDO AS PORTAS
+##  MAPEANDO AS PORTAS
 Precisamos mapear as portas para rodar local 
 ``` 
 kubectl get svc -n argocd 
@@ -59,15 +63,16 @@ argocd-server-metrics                     ClusterIP   10.107.189.165   <none>   
 kubectl port-forward svc/argocd-server 8080:443 -n argocd
 ``` 
 
-# PEGUE A SENHA ADMIN
+## PEGUE A SENHA ADMIN
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode && echo
 
 ## ABRA NO BROWSER 
 localhost:8080  admin 
 
-
+---
 #### Links
 SITES DE REFERÊNCIAS QUE USEI: 
+* https://gitlab.com/nanuchi/argocd-app-config
 
 * Config repo: [https://gitlab.com/nanuchi/argocd-app-config](https://gitlab.com/nanuchi/argocd-app-config)
 
