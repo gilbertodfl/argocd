@@ -68,7 +68,14 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 ## ABRA NO BROWSER 
 localhost:8080  admin 
-
+---
+Vamos testar alterando o ambiente. 
+Certifique-se que set application.yaml está apontando para seu projeto
+```
+  source:
+    ### AQUI VOCÊ DEVE APONTAR PARA SEU PROJETO
+    repoURL: https://github.com/gilbertodfl/argocd.git
+```
 ---
 #### Links
 SITES DE REFERÊNCIAS QUE USEI: 
