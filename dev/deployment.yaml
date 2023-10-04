@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: myapp
 spec:
   selector:
     matchLabels:
-      app: myapp-deploy
+      app: myapp
   replicas: 2
   template:
     metadata:
@@ -14,9 +14,6 @@ spec:
     spec:
       containers:
       - name: myapp
-        ### As alterações no argocd basicamente seriam mudar a versão 
-        ### e assim acompanhar o que acontece.
-        image: nanajanashia/argocd-app:1.2
-        ##image: nanajanashia/argocd-app:1.0
+        image: nanajanashia/argocd-app:1.0
         ports:
         - containerPort: 8080
